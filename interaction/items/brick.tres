@@ -1,0 +1,11 @@
+[gd_resource type="ItemDefinition" load_steps=3 format=3 uid="uid://cmtko6kjgf7cy"]
+
+[ext_resource type="ItemCategory" uid="uid://bhwlgxs2c8cl0" path="res://interaction/items/materials.tres" id="1_7ude0"]
+[ext_resource type="Texture2D" uid="uid://dl77128otfegj" path="res://game_art/tile1.png" id="1_pp4qp"]
+
+[resource]
+max_stack = 99
+name = "brick"
+icon = ExtResource("1_pp4qp")
+weight = 100.0
+categories = Array[ItemCategory]([ExtResource("1_7ude0")])

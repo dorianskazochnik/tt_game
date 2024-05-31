@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://djg7mlq0bi8ua"]
+
+[ext_resource type="Script" path="res://interaction/world.gd" id="1_lkpb7"]
+[ext_resource type="Texture2D" uid="uid://dl77128otfegj" path="res://game_art/tile1.png" id="2_i7nx4"]
+[ext_resource type="PackedScene" uid="uid://dgfckwggajvaw" path="res://interaction/interacton_area.tscn" id="3_5yl1w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_24uix"]
+radius = 31.3209
+
+[node name="world" type="Node2D"]
+position = Vector2(1106, 812)
+script = ExtResource("1_lkpb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_i7nx4")
+
+[node name="InteractonArea" parent="." instance=ExtResource("3_5yl1w")]
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractonArea"]
+shape = SubResource("CircleShape2D_24uix")
+
+[connection signal="body_entered" from="InteractonArea" to="." method="_on_interacton_area_body_entered"]
+[connection signal="body_exited" from="InteractonArea" to="." method="_on_interacton_area_body_exited"]

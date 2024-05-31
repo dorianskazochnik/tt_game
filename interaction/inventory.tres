@@ -1,0 +1,6 @@
+[gd_resource type="InventoryDatabase" load_steps=2 format=3 uid="uid://7u2hkki71b7n"]
+
+[ext_resource type="ItemCategory" uid="uid://bhwlgxs2c8cl0" path="res://interaction/items/materials.tres" id="1_f74ir"]
+
+[resource]
+item_categories = Array[ItemCategory]([ExtResource("1_f74ir")])
