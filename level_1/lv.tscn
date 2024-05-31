@@ -1,0 +1,79 @@
+[gd_scene load_steps=19 format=3 uid="uid://0rlcuh8bagjv"]
+
+[ext_resource type="Script" path="res://level_1/level.gd" id="1_220x0"]
+[ext_resource type="ItemDefinition" uid="uid://cmtko6kjgf7cy" path="res://interaction/items/brick.tres" id="2_icyb5"]
+[ext_resource type="PackedScene" uid="uid://djg7mlq0bi8ua" path="res://interaction/world.tscn" id="2_qdku6"]
+[ext_resource type="PackedScene" uid="uid://b24ygpkw8ysbs" path="res://characters/characters.tscn" id="3_ob112"]
+[ext_resource type="Texture2D" uid="uid://jfx6vudndwv8" path="res://game_art/bg_entry1.png" id="3_w31jo"]
+[ext_resource type="PackedScene" uid="uid://dgtxfjxtyb3vt" path="res://ui/ui.tscn" id="4_6up2b"]
+[ext_resource type="InventoryDatabase" uid="uid://7u2hkki71b7n" path="res://interaction/inventory.tres" id="4_85pn5"]
+[ext_resource type="PackedScene" uid="uid://w5xq1fx4p4dd" path="res://interaction/inv_ui/InventoryUI.tscn" id="8_d3f4o"]
+
+[sub_resource type="Item" id="Item_ehlbu"]
+definition = ExtResource("2_icyb5")
+
+[sub_resource type="Slot" id="Slot_i2cgo"]
+
+[sub_resource type="Slot" id="Slot_vn375"]
+
+[sub_resource type="Slot" id="Slot_gw52x"]
+
+[sub_resource type="Slot" id="Slot_b3l7h"]
+
+[sub_resource type="Slot" id="Slot_kgwmy"]
+
+[sub_resource type="Slot" id="Slot_hkvgq"]
+
+[sub_resource type="Slot" id="Slot_jn1o4"]
+
+[sub_resource type="Slot" id="Slot_in71o"]
+
+[sub_resource type="Slot" id="Slot_nmgr3"]
+
+[node name="Lv" type="Node2D" groups=["Persist"]]
+script = ExtResource("1_220x0")
+item = SubResource("Item_ehlbu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_w31jo")
+centered = false
+offset = Vector2(0, -1080)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-11, -59)
+polygon = PackedVector2Array(-22, 1133, -43, -1126, 3876, -1131, 3887, -245, 3102, -197, 2536, 44, 2103, 497, 1681, 593, 833, 668, 795, 935, 2141, 876, 2872, 636, 3273, 316, 3881, 273, 3881, 1127)
+
+[node name="world" parent="." instance=ExtResource("2_qdku6")]
+
+[node name="characters" parent="." instance=ExtResource("3_ob112")]
+position = Vector2(999, 757)
+
+[node name="Camera2D" type="Camera2D" parent="characters"]
+process_callback = 0
+limit_left = 0
+limit_top = -1080
+limit_right = 3840
+limit_bottom = 1080
+limit_smoothed = true
+
+[node name="Inventory" type="Inventory" parent="."]
+slots = Array[Slot]([SubResource("Slot_i2cgo"), SubResource("Slot_vn375"), SubResource("Slot_gw52x"), SubResource("Slot_b3l7h"), SubResource("Slot_kgwmy"), SubResource("Slot_hkvgq"), SubResource("Slot_jn1o4"), SubResource("Slot_in71o"), SubResource("Slot_nmgr3"), SubResource("Slot_in71o"), SubResource("Slot_nmgr3"), SubResource("Slot_nmgr3")])
+database = ExtResource("4_85pn5")
+
+[node name="ui" parent="." instance=ExtResource("4_6up2b")]
+metadata/_edit_use_anchors_ = true
+
+[node name="inventryUI" parent="." instance=ExtResource("8_d3f4o")]
+offset_left = 833.0
+offset_top = 85.0
+offset_right = 833.72
+offset_bottom = 85.12
+
+[connection signal="pressed" from="ui/other_buttons/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="ui/other_buttons/load" to="." method="_on_load_pressed"]
+
+[editable path="characters"]
+[editable path="ui"]
