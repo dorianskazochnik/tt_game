@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgtxfjxtyb3vt"]
+
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_gy3ik"]
+[ext_resource type="Theme" uid="uid://b2qcealaplrh2" path="res://menu.tres" id="1_mo721"]
+
+[node name="ui" type="Control"]
+top_level = true
+z_index = 21
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gy3ik")
+
+[node name="pause" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1700.0
+offset_top = 850.0
+offset_right = 1860.0
+offset_bottom = 1010.0
+
+[node name="pause_button" type="Button" parent="pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mo721")
+metadata/_edit_use_anchors_ = true
+
+[node name="other_buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1620.0
+offset_top = 250.0
+offset_right = 1860.0
+offset_bottom = 810.0
+
+[node name="save" type="Button" parent="other_buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -400.0
+theme = ExtResource("1_mo721")
+theme_override_font_sizes/font_size = 80
+text = "Сохранить"
+
+[node name="load" type="Button" parent="other_buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 200.0
+offset_bottom = -200.0
+theme = ExtResource("1_mo721")
+theme_override_font_sizes/font_size = 80
+text = "Загрузить"
+
+[node name="quit_button" type="Button" parent="other_buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 400.0
+theme = ExtResource("1_mo721")
+theme_override_font_sizes/font_size = 80
+text = "Выйти"
+
+[connection signal="pressed" from="pause/pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="other_buttons/quit_button" to="." method="_on_quit_button_pressed"]
