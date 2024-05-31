@@ -1,2 +1,7 @@
 # tt_game
-TT
+
+# PLUGINS BY :
+ Dialogue Manager - Nathan Hoad
+ Inventory System - Expresso Bits
+ SaveSystem - Adam Kormos
+ Scene Manager - GlassBrick
