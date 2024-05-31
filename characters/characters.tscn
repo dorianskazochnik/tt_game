@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b24ygpkw8ysbs"]
+
+[ext_resource type="Script" path="res://characters/characters.gd" id="1_scmqv"]
+[ext_resource type="SpriteFrames" uid="uid://bcl3pomd2tau2" path="res://characters/asher.tres" id="2_do5kw"]
+[ext_resource type="SpriteFrames" uid="uid://dqyip6lb132p2" path="res://characters/huan.tres" id="3_55ip8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlkfx"]
+radius = 55.0
+height = 196.0
+
+[node name="characters" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_scmqv")
+
+[node name="character_active" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7.25, -145.416)
+sprite_frames = ExtResource("2_do5kw")
+animation = &"idle_down"
+
+[node name="character_passive" type="AnimatedSprite2D" parent="."]
+position = Vector2(-11, -142.576)
+sprite_frames = ExtResource("3_55ip8")
+animation = &"idle_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_mlkfx")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

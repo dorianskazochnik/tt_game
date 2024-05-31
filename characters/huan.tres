@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dqyip6lb132p2"]
+
+[ext_resource type="Texture2D" uid="uid://o38srblao8cc" path="res://game_art/huan still.png" id="1_ck45r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc71e"]
+atlas = ExtResource("1_ck45r")
+region = Rect2(672, 0, 205, 509)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0ker"]
+atlas = ExtResource("1_ck45r")
+region = Rect2(17, 0, 226, 509)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqfbs"]
+atlas = ExtResource("1_ck45r")
+region = Rect2(243, 0, 226, 509)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sct1k"]
+atlas = ExtResource("1_ck45r")
+region = Rect2(467, 0, 208, 509)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc71e")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0ker")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqfbs")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sct1k")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}]
