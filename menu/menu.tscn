@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://vxgo7iddel7f"]
+
+[ext_resource type="Texture2D" uid="uid://b2xvjith8kmy6" path="res://game_art/menu.png" id="1_6epfc"]
+[ext_resource type="Script" path="res://menu/menu.gd" id="1_7u8c8"]
+[ext_resource type="Theme" uid="uid://b2qcealaplrh2" path="res://menu.tres" id="2_drv1a"]
+[ext_resource type="AudioStream" uid="uid://criiqjgf5bw10" path="res://piano/apronus1710348270655809.mp3" id="4_reu5h"]
+[ext_resource type="AudioStream" uid="uid://cerxld44bps4p" path="res://piano/apronus17103487602012165.mp3" id="5_e6r1e"]
+[ext_resource type="AudioStream" uid="uid://ccrc1506kaiub" path="res://piano/apronus17103487961403694.mp3" id="6_53q4b"]
+
+[node name="menu" type="Node2D"]
+z_index = 20
+script = ExtResource("1_7u8c8")
+
+[node name="bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_6epfc")
+centered = false
+
+[node name="quit" type="Button" parent="."]
+offset_left = 210.0
+offset_top = 480.0
+offset_right = 450.0
+offset_bottom = 640.0
+theme = ExtResource("2_drv1a")
+theme_override_colors/font_color = Color(0.462745, 0.247059, 0.223529, 1)
+theme_override_colors/font_disabled_color = Color(0.482353, 0.262745, 0.227451, 1)
+theme_override_font_sizes/font_size = 80
+text = "Выйти"
+flat = true
+
+[node name="continue" type="Button" parent="."]
+offset_left = 210.0
+offset_top = 360.0
+offset_right = 450.0
+offset_bottom = 520.0
+theme = ExtResource("2_drv1a")
+theme_override_colors/font_color = Color(0.462745, 0.247059, 0.223529, 1)
+theme_override_colors/font_disabled_color = Color(0.482353, 0.262745, 0.227451, 1)
+theme_override_font_sizes/font_size = 80
+text = "Продолжить"
+flat = true
+
+[node name="play" type="Button" parent="."]
+offset_left = 210.0
+offset_top = 240.0
+offset_right = 450.0
+offset_bottom = 400.0
+theme = ExtResource("2_drv1a")
+theme_override_colors/font_color = Color(0.462745, 0.247059, 0.223529, 1)
+theme_override_colors/font_disabled_color = Color(0.482353, 0.262745, 0.227451, 1)
+theme_override_font_sizes/font_size = 80
+text = "Играть"
+flat = true
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_reu5h")
+
+[node name="music_light" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_e6r1e")
+
+[node name="music_hover_press" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_53q4b")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
