@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk0edxgnp675n"]
+
+[ext_resource type="Script" path="res://cutscene/cutscene_alfa.gd" id="1_6liyy"]
+[ext_resource type="PackedScene" uid="uid://dgtxfjxtyb3vt" path="res://ui/ui.tscn" id="2_fqnxe"]
+[ext_resource type="Texture2D" uid="uid://bl0qbiyb0tu8e" path="res://game_art/bg_sea.png" id="2_w30po"]
+[ext_resource type="Texture2D" uid="uid://ci1lqr6pen5sy" path="res://game_art/bg_railway.png" id="4_wpifv"]
+[ext_resource type="Texture2D" uid="uid://bd2ayxq2c68qx" path="res://game_art/bg_wind.png" id="5_upirg"]
+[ext_resource type="Texture2D" uid="uid://dpnqrgshuikyk" path="res://game_art/bgsketch_water.png" id="6_5jlrj"]
+
+[node name="cutscene" type="Node2D" groups=["Persist"]]
+script = ExtResource("1_6liyy")
+
+[node name="sea" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_w30po")
+
+[node name="railway" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_wpifv")
+
+[node name="wind" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_upirg")
+
+[node name="water" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_5jlrj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = false
+
+[node name="ui" parent="." instance=ExtResource("2_fqnxe")]
+show_behind_parent = true
+z_as_relative = false
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="pressed" from="ui/other_buttons/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="ui/other_buttons/load" to="." method="_on_load_pressed"]
+
+[editable path="ui"]
