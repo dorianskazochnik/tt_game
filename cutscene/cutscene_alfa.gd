@@ -17,39 +17,37 @@ var title = "first_dialog"
 @onready var railway = $railway
 @onready var wind = $wind
 @onready var water = $water
-@onready var sprite = $Sprite2D
-
-var bgs_level_1 = []
 
 @export var saving_path = "user://savettgame.save"
 
 signal confirm
 
 func _ready():
-	bgs_level_1.push_back(sea)
-	bgs_level_1.push_back(railway)
-	bgs_level_1.push_back(wind)
-	bgs_level_1.push_back(water)
 	SaveSystem._load(saving_path)
 	save_dict = SaveSystem.get_var("save_dict")
 	title = save_dict["title"]
-	self.confirm.connect(change_bg)
+	if !save_dict or !title:
+		title = "first_dialog"
 	if title == "first_dialog":
-		sprite.texture = bgs_level_1[0].texture
+		sea.show()
 		await confirm
+		sea.hide()
+		railway.show()
+		railway.play("default")
 		await confirm
-		confirm.disconnect(change_bg)
+		railway.stop()
+		railway.hide()
+		sea.show()
+		wind.show()
+		wind.play("default")
 	else:
-		sprite.texture = bgs_level_1[3].texture
+		sea.hide()
+		wind.stop()
+		wind.hide()
+		water.show()
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(res, title)
 	$ui/other_buttons.hide()
 	DialogueManager.dialogue_ended.connect(ended)
-
-func change_bg():
-	for i in range(3):
-		if bgs_level_1[i].texture == sprite.texture:
-			sprite.texture = bgs_level_1[i + 1].texture
-			break
 
 func _input(delta):
 	if Input.is_action_pressed("quit"):

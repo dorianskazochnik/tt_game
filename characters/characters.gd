@@ -2,30 +2,26 @@ extends CharacterBody2D
 class_name Player
 
 const MAX_SPEED = 300
+var speed = 300
 var input = Vector2.ZERO
+var move_allowed = true
 @onready var character_active: Node2D = $character_active
 @onready var character_passive: Node2D = $character_passive
 @onready var huan_animation = preload("res://characters/huan.tres")
 @onready var asher_animation = preload("res://characters/asher.tres")
 @export var current_portrait: bool = true
+var last_pos = Vector2.ZERO
 
 func _ready():
 	character_active.sprite_frames = huan_animation
 	character_passive.sprite_frames = asher_animation
 	character_passive.play("idle_down")
 	character_active.play("idle_down")
+	last_pos = character_active.position
 
 func _physics_process(delta):
 	if Input.is_action_just_released("space"):
 		swap_characters()
-	
-	if character_active.position.y <= character_passive.position.y:
-		character_active.z_index = 0
-		character_passive.z_index = 1
-	elif character_active.position.y > character_passive.position.y :
-		character_active.z_index = 1
-		character_passive.z_index = 0
-	
 	player_movement(delta)
 
 func get_input():
@@ -34,11 +30,21 @@ func get_input():
 	return input.normalized()
 
 func player_movement(delta):
-	input = get_input()
-	var collide = move_and_collide(MAX_SPEED * input * delta)
-	if collide:
-		input = Vector2.ZERO
-	character_active.position += input * MAX_SPEED * delta
+	if move_allowed:
+		input = get_input()
+		speed = MAX_SPEED
+		character_active.position += input * speed * delta
+		move_and_collide(input * speed * delta)
+	else:
+		var distance = character_active.position.distance_to(last_pos)
+		if distance < 10:
+			input = get_input()
+			speed = MAX_SPEED
+			character_active.position += input * speed * delta
+			move_and_collide(input * speed * delta)
+		elif distance >= 10:
+			character_active.position += MAX_SPEED * delta * character_active.position.direction_to(last_pos) / 10
+			move_and_collide(MAX_SPEED * delta * character_active.position.direction_to(last_pos) / 10)
 	var distance = character_passive.position.distance_to(character_active.position)
 	if distance > 200:
 		character_passive.position += MAX_SPEED * delta * character_passive.position.direction_to(character_active.position)
@@ -64,3 +70,11 @@ func swap_characters():
 		character_active.sprite_frames = huan_animation
 		character_passive.sprite_frames = asher_animation
 		current_portrait = true
+
+func _on_static_body_2d_body_entered(body):
+	move_allowed = true
+
+func _on_static_body_2d_body_exited(body):
+	if move_allowed:
+		last_pos = character_active.position
+	move_allowed = false

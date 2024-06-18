@@ -25,12 +25,14 @@ func _process(delta):
 	$characters/Camera2D.position = $characters/character_active.position
 	$ui.position = $characters/Camera2D.get_screen_center_position() - Vector2(960, 540)
 	$inventryUI.position = $characters/Camera2D.get_screen_center_position() - Vector2(152, 500)
-	if Input.is_action_pressed("quit"):
+
+func _input(event):
+	if event is InputEvent and event.is_action_pressed("quit"):
 		await SceneManager.fade_out()
 		get_tree().quit()
-	if Input.is_action_pressed("save"):
+	elif event is InputEvent and event.is_action_pressed("save"):
 		_on_save_pressed()
-	if Input.is_action_pressed("load"):
+	elif event is InputEvent and event.is_action_pressed("load"):
 		_on_load_pressed()
 
 func add(i):
