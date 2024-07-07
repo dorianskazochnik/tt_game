@@ -18,6 +18,12 @@ var title = "water"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SaveSystem.save(saving_path)
+	SaveSystem._load(saving_path)
+	if SaveSystem.get_var("save_dict") and save_dict != SaveSystem.get_var("save_dict"):
+		save_dict = SaveSystem.get_var("save_dict")
+		$characters/character_active.global_position.x = save_dict["character_x"]
+		$characters/character_active.global_position.y = save_dict["character_y"]
 	$ui/other_buttons.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,8 +61,8 @@ func _on_save_pressed():
 		"parent" : get_parent().get_path(),
 		"pos_x" : global_position.x,
 		"pos_y" : global_position.y,
-		"character_x" : $characters/character_active.position.x,
-		"character_y" : $characters/character_active.position.y,
+		"character_x" : $characters/character_active.global_position.x,
+		"character_y" : $characters/character_active.global_position.y,
 		"title" : title,
 	}
 	SaveSystem.set_var("save_dict", save_dict)
@@ -70,6 +76,8 @@ func _on_load_pressed():
 	if save_dict["filename"] == "cutscene":
 		await SceneManager.fade_out()
 		SceneManager.change_scene("res://cutscene/cutscene_alfa.tscn", { "skip_fade_out": true })
-	$characters/character_active.position.x = save_dict["character_x"]
-	$characters/character_active.position.y = save_dict["character_y"]
+	$characters/character_active.global_position.x = save_dict["character_x"]
+	$characters/character_active.global_position.y = save_dict["character_y"]
 
+func _on_tree_exiting():
+	_on_save_pressed()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dk0edxgnp675n"]
+[gd_scene load_steps=16 format=3 uid="uid://dk0edxgnp675n"]
 
 [ext_resource type="Script" path="res://cutscene/cutscene_alfa.gd" id="1_6liyy"]
 [ext_resource type="Texture2D" uid="uid://b7re66v5g26yu" path="res://game_art/bg_sea1.png" id="2_e062i"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d1hug3377kpph" path="res://game_art/1.png" id="8_4wvkc"]
 [ext_resource type="Texture2D" uid="uid://d2ryman47le3m" path="res://game_art/3.png" id="9_v50qo"]
 [ext_resource type="Texture2D" uid="uid://bggnos7w78sex" path="res://game_art/2.png" id="10_aluyd"]
+[ext_resource type="Theme" uid="uid://44tjcu7ri1a7" path="res://balloon.tres" id="12_b64hi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ex8nn"]
 animations = [{
@@ -81,6 +82,23 @@ centered = false
 visible = false
 texture = ExtResource("6_5jlrj")
 centered = false
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+z_index = 20
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 584.0
+offset_top = 923.0
+offset_right = 1375.0
+offset_bottom = 1017.0
+grow_horizontal = 2
+theme = ExtResource("12_b64hi")
+theme_override_font_sizes/font_size = 80
+text = "[Enter] to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ui" parent="." instance=ExtResource("2_fqnxe")]
 show_behind_parent = true

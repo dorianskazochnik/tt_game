@@ -7,7 +7,8 @@ extends Node2D
 	"pos_y" : 0,
 	"character_x" : 0,
 	"character_y" : 0,
-	"title" : "first_dialog",
+	"title" : "water",
+	"items" : {},
 }
 
 var title = "first_dialog"
@@ -23,14 +24,15 @@ var title = "first_dialog"
 signal confirm
 
 func _ready():
+	SaveSystem.save(saving_path)
 	SaveSystem._load(saving_path)
-	save_dict = SaveSystem.get_var("save_dict")
-	title = save_dict["title"]
 	if !save_dict or !title:
 		title = "first_dialog"
 	if title == "first_dialog":
 		sea.show()
+		$Label.show()
 		await confirm
+		$Label.hide()
 		sea.hide()
 		railway.show()
 		railway.play("default")
@@ -41,6 +43,7 @@ func _ready():
 		wind.show()
 		wind.play("default")
 	else:
+		$Label.hide()
 		sea.hide()
 		wind.stop()
 		wind.hide()
@@ -72,6 +75,7 @@ func _on_save_pressed():
 		"character_x" : 0,
 		"character_y" : 0,
 		"title" : title,
+		"items" : {},
 	}
 	SaveSystem.set_var("save_dict", save_dict)
 	SaveSystem.save(saving_path)

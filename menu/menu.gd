@@ -29,10 +29,10 @@ func _on_continue_pressed():
 	var save_dict = SaveSystem.get_var("save_dict")
 	%music.stop()
 	%music_light.stop()
-	if save_dict["filename"] == "cutscene":
+	if save_dict and save_dict["filename"] == "cutscene" or !save_dict:
 		await SceneManager.fade_out()
 		SceneManager.change_scene("res://cutscene/cutscene_alfa.tscn", { "skip_fade_out": true })
-	elif save_dict["filename"] == "lv":
+	elif save_dict and save_dict["filename"] == "lv":
 		await SceneManager.fade_out()
 		SceneManager.change_scene("res://level_1/lv.tscn", { "skip_fade_out": true })
 
