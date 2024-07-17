@@ -22,6 +22,8 @@ func _ready():
 	SaveSystem._load(saving_path)
 	if SaveSystem.get_var("save_dict") and save_dict != SaveSystem.get_var("save_dict"):
 		save_dict = SaveSystem.get_var("save_dict")
+		global_position.x = save_dict["pos_x"]
+		global_position.y = save_dict["pos_y"]
 		$characters/character_active.global_position.x = save_dict["character_x"]
 		$characters/character_active.global_position.y = save_dict["character_y"]
 	$ui/other_buttons.hide()
@@ -76,6 +78,8 @@ func _on_load_pressed():
 	if save_dict["filename"] == "cutscene":
 		await SceneManager.fade_out()
 		SceneManager.change_scene("res://cutscene/cutscene_alfa.tscn", { "skip_fade_out": true })
+	global_position.x = save_dict["pos_x"]
+	global_position.y = save_dict["pos_y"]
 	$characters/character_active.global_position.x = save_dict["character_x"]
 	$characters/character_active.global_position.y = save_dict["character_y"]
 

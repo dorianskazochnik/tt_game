@@ -78,5 +78,6 @@ offset_bottom = 85.12
 [connection signal="pressed" from="ui/other_buttons/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="ui/other_buttons/load" to="." method="_on_load_pressed"]
 
+[editable path="item_"]
 [editable path="characters"]
 [editable path="ui"]

@@ -20,7 +20,7 @@ func _on_play_pressed():
 	%music.stop()
 	%music_light.stop()
 	await SceneManager.fade_out()
-	SceneManager.change_scene("res://cutscene/cutscene_alfa.tscn", { "skip_fade_out": true })
+	SceneManager.change_scene("res://cutscene/cutscene_alfa.tscn", { "skip_fade_out": true, "on_tree_enter" : func(scene): global_position = Vector2(0, 0) })
 
 func _on_continue_pressed():
 	%music_hover_press.play()
@@ -35,6 +35,8 @@ func _on_continue_pressed():
 	elif save_dict and save_dict["filename"] == "lv":
 		await SceneManager.fade_out()
 		SceneManager.change_scene("res://level_1/lv.tscn", { "skip_fade_out": true })
+		global_position.x = save_dict["pos_x"]
+		global_position.y = save_dict["pos_y"]
 
 func _on_quit_pressed():
 	%music_hover_press.play()

@@ -8,7 +8,6 @@ extends Node2D
 	"character_x" : 0,
 	"character_y" : 0,
 	"title" : "water",
-	"items" : {},
 }
 
 var title = "first_dialog"
@@ -87,6 +86,8 @@ func _on_load_pressed():
 	if save_dict["filename"] == "lv":
 		await SceneManager.fade_out()
 		SceneManager.change_scene("res://level_1/lv.tscn", { "skip_fade_out": true })
+		global_position.x = save_dict["pos_x"]
+		global_position.y = save_dict["pos_y"]
 
 func ended():
 	await SceneManager.fade_out()
